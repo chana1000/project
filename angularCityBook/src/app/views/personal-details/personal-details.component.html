@@ -1,0 +1,53 @@
+<form >
+<div>
+  <p>first name</p>
+    <input type="text"  name="firstName"  maxlength="25" [(ngModel)]="firstName"  #Fname required autofocus/><br/>
+    <div *ngIf="fnameIsvalid(Fname.value,0)">first name required</div>
+    <p>last name</p>
+    <input type="text"  name="lastName" #lname  maxlength="25" [(ngModel)]="lastName"  required/><br/>
+    <div *ngIf="fnameIsvalid(lname.value,1)">last name required</div>
+    <P>ID number</P>
+    <input type="text" #t name="tz" maxlength="15" [(ngModel)]="tz" required/><br/>
+    <div *ngIf="TzIsValid(t.value,0)">ID number required and only 9 numbers</div>
+    <p>date of birth</p>
+    <input type="date" #dateb name="dateOfBirth"  [(ngModel)]="dateOfbirth" min="1901-01-02" required/><br/>
+    <div *ngIf="dateValid(dateb.value,0)">date isnt valid</div>
+    <p>choose your HMO</p>
+    <div *ngFor="let hmo of hmos">
+    <input type="radio" name="hh" (click)="changeHmo(hmo)">
+    {{hmo.HmoName}}
+  </div>
+  <div>
+    <p>choose your kind</p>
+    <div *ngFor="let kin of kind">
+      <input type="radio" name="kk" (click)="changeKind(kin)">
+      {{kin.KindName}}
+    </div>
+</div>
+
+<div>
+  <input type="submit" (click)="newUser()" value="save"/>
+  <div *ngIf="userOld">
+   <label>You already exist in the system for change the details Click here</label>
+   <button (click)="changeUser()">change</button>
+  </div>
+  <button (click)="addChild()">add new children</button>
+</div>
+<div *ngIf="add">
+  <p>name of child</p>
+    <input type="text" #w name="Name" [(ngModel)]="nameChild" maxlength="25" required/><br/>
+    <div *ngIf="fnameIsvalid(w.value,2)">name required</div>
+    <p>ID number of your child</p>
+    <input type="text" #ttC name="tz" [(ngModel)]="tzChild"   maxlength="15" required/><br/>
+    <div *ngIf="TzIsValid(ttC.value,1)"> ID number required and only 9 numbers</div>
+    <p>Birthday of your child</p>
+    <input type="date" #d name="dateOfBirth" [(ngModel)]="dateOfBirthChild" required/><br/>
+    <div *ngIf="dateValid(d.value,1)">date not valid</div>
+    <input type="submit" (click)="newChild()" value="save child" />
+    <div *ngIf="childOld">
+      This child already exists in the system If you want to change data click here
+      <button (click)="changeChild()">change</button>
+    </div>
+</div>
+</div>
+</form>

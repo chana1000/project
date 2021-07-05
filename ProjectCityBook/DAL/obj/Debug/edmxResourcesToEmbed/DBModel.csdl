@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CityBookDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Children">
+    <Key>
+      <PropertyRef Name="ChildId" />
+    </Key>
+    <Property Name="ChildId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdParent" Type="Int32" />
+    <Property Name="ChildName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="Tz" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Children_Users" FromRole="Children" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="HMO">
+    <Key>
+      <PropertyRef Name="HmoId" />
+    </Key>
+    <Property Name="HmoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HmoName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_HMO" FromRole="HMO" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Kind">
+    <Key>
+      <PropertyRef Name="KindId" />
+    </Key>
+    <Property Name="KindId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KindName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_Kind" FromRole="Kind" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tz" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="IdHMO" Type="Int32" />
+    <Property Name="IdKind" Type="Int32" />
+    <NavigationProperty Name="Children" Relationship="Self.FK_Children_Users" FromRole="Users" ToRole="Children" />
+    <NavigationProperty Name="HMO" Relationship="Self.FK_Users_HMO" FromRole="Users" ToRole="HMO" />
+    <NavigationProperty Name="Kind" Relationship="Self.FK_Users_Kind" FromRole="Users" ToRole="Kind" />
+  </EntityType>
+  <Association Name="FK_Children_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Children" Type="Self.Children" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Children">
+        <PropertyRef Name="IdParent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_HMO">
+    <End Role="HMO" Type="Self.HMO" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HMO">
+        <PropertyRef Name="HmoId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="IdHMO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Kind">
+    <End Role="Kind" Type="Self.Kind" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kind">
+        <PropertyRef Name="KindId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="IdKind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CityBookDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Children" EntityType="Self.Children" />
+    <EntitySet Name="HMO" EntityType="Self.HMO" />
+    <EntitySet Name="Kind" EntityType="Self.Kind" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Children_Users" Association="Self.FK_Children_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Children" EntitySet="Children" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_HMO" Association="Self.FK_Users_HMO">
+      <End Role="HMO" EntitySet="HMO" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Kind" Association="Self.FK_Users_Kind">
+      <End Role="Kind" EntitySet="Kind" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

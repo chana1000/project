@@ -1,0 +1,14 @@
+D:\project\ProjectCityBook\BL\bin\Debug\BL.dll
+D:\project\ProjectCityBook\BL\bin\Debug\BL.pdb
+D:\project\ProjectCityBook\BL\bin\Debug\DAL.dll
+D:\project\ProjectCityBook\BL\bin\Debug\DTO.dll
+D:\project\ProjectCityBook\BL\bin\Debug\EntityFramework.dll
+D:\project\ProjectCityBook\BL\bin\Debug\DAL.pdb
+D:\project\ProjectCityBook\BL\bin\Debug\DAL.dll.config
+D:\project\ProjectCityBook\BL\bin\Debug\DTO.pdb
+D:\project\ProjectCityBook\BL\bin\Debug\EntityFramework.xml
+D:\project\ProjectCityBook\BL\obj\Debug\BL.csprojAssemblyReference.cache
+D:\project\ProjectCityBook\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+D:\project\ProjectCityBook\BL\obj\Debug\BL.csproj.CopyComplete
+D:\project\ProjectCityBook\BL\obj\Debug\BL.dll
+D:\project\ProjectCityBook\BL\obj\Debug\BL.pdb

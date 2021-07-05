@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CityBookDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Children">
+          <Key>
+            <PropertyRef Name="ChildId" />
+          </Key>
+          <Property Name="ChildId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdParent" Type="int" Nullable="false" />
+          <Property Name="ChildName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="Tz" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HMO">
+          <Key>
+            <PropertyRef Name="HmoId" />
+          </Key>
+          <Property Name="HmoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HmoName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kind">
+          <Key>
+            <PropertyRef Name="KindId" />
+          </Key>
+          <Property Name="KindId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KindName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tz" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="IdHMO" Type="int" Nullable="false" />
+          <Property Name="IdKind" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Children_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Children" Type="Self.Children" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Children">
+              <PropertyRef Name="IdParent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_HMO">
+          <End Role="HMO" Type="Self.HMO" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HMO">
+              <PropertyRef Name="HmoId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdHMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Kind">
+          <End Role="Kind" Type="Self.Kind" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kind">
+              <PropertyRef Name="KindId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdKind" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CityBookDBModelStoreContainer">
+          <EntitySet Name="Children" EntityType="Self.Children" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HMO" EntityType="Self.HMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kind" EntityType="Self.Kind" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Children_Users1" Association="Self.FK_Children_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Children" EntitySet="Children" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_HMO" Association="Self.FK_Users_HMO">
+            <End Role="HMO" EntitySet="HMO" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Kind" Association="Self.FK_Users_Kind">
+            <End Role="Kind" EntitySet="Kind" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CityBookDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Children">
+          <Key>
+            <PropertyRef Name="ChildId" />
+          </Key>
+          <Property Name="ChildId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdParent" Type="Int32" Nullable="false" />
+          <Property Name="ChildName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Tz" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Children_Users1" FromRole="Children" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="HMO">
+          <Key>
+            <PropertyRef Name="HmoId" />
+          </Key>
+          <Property Name="HmoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HmoName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_HMO" FromRole="HMO" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Kind">
+          <Key>
+            <PropertyRef Name="KindId" />
+          </Key>
+          <Property Name="KindId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KindName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Kind" FromRole="Kind" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tz" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdHMO" Type="Int32" Nullable="false" />
+          <Property Name="IdKind" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Children" Relationship="Self.FK_Children_Users1" FromRole="Users" ToRole="Children" />
+          <NavigationProperty Name="HMO" Relationship="Self.FK_Users_HMO" FromRole="Users" ToRole="HMO" />
+          <NavigationProperty Name="Kind" Relationship="Self.FK_Users_Kind" FromRole="Users" ToRole="Kind" />
+        </EntityType>
+        <Association Name="FK_Children_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Children" Type="Self.Children" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Children">
+              <PropertyRef Name="IdParent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_HMO">
+          <End Role="HMO" Type="Self.HMO" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HMO">
+              <PropertyRef Name="HmoId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdHMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Kind">
+          <End Role="Kind" Type="Self.Kind" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kind">
+              <PropertyRef Name="KindId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdKind" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CityBookDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Children" EntityType="Self.Children" />
+          <EntitySet Name="HMO" EntityType="Self.HMO" />
+          <EntitySet Name="Kind" EntityType="Self.Kind" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Children_Users1" Association="Self.FK_Children_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Children" EntitySet="Children" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_HMO" Association="Self.FK_Users_HMO">
+            <End Role="HMO" EntitySet="HMO" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Kind" Association="Self.FK_Users_Kind">
+            <End Role="Kind" EntitySet="Kind" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CityBookDBModelStoreContainer" CdmEntityContainer="CityBookDBEntities1">
+          <EntitySetMapping Name="Children">
+            <EntityTypeMapping TypeName="CityBookDBModel.Children">
+              <MappingFragment StoreEntitySet="Children">
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="ChildName" ColumnName="ChildName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Tz" ColumnName="Tz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HMO">
+            <EntityTypeMapping TypeName="CityBookDBModel.HMO">
+              <MappingFragment StoreEntitySet="HMO">
+                <ScalarProperty Name="HmoId" ColumnName="HmoId" />
+                <ScalarProperty Name="HmoName" ColumnName="HmoName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kind">
+            <EntityTypeMapping TypeName="CityBookDBModel.Kind">
+              <MappingFragment StoreEntitySet="Kind">
+                <ScalarProperty Name="KindId" ColumnName="KindId" />
+                <ScalarProperty Name="KindName" ColumnName="KindName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CityBookDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Tz" ColumnName="Tz" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="IdHMO" ColumnName="IdHMO" />
+                <ScalarProperty Name="IdKind" ColumnName="IdKind" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

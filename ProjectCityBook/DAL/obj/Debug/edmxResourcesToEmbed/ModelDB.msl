@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CityBookDBModelStoreContainer" CdmEntityContainer="CityBookDBEntities1">
+    <EntitySetMapping Name="Children">
+      <EntityTypeMapping TypeName="CityBookDBModel.Children">
+        <MappingFragment StoreEntitySet="Children">
+          <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+          <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+          <ScalarProperty Name="ChildName" ColumnName="ChildName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Tz" ColumnName="Tz" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HMO">
+      <EntityTypeMapping TypeName="CityBookDBModel.HMO">
+        <MappingFragment StoreEntitySet="HMO">
+          <ScalarProperty Name="HmoId" ColumnName="HmoId" />
+          <ScalarProperty Name="HmoName" ColumnName="HmoName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kind">
+      <EntityTypeMapping TypeName="CityBookDBModel.Kind">
+        <MappingFragment StoreEntitySet="Kind">
+          <ScalarProperty Name="KindId" ColumnName="KindId" />
+          <ScalarProperty Name="KindName" ColumnName="KindName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CityBookDBModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Tz" ColumnName="Tz" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="IdHMO" ColumnName="IdHMO" />
+          <ScalarProperty Name="IdKind" ColumnName="IdKind" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

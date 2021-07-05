@@ -1,0 +1,29 @@
+
+<div>
+<p>
+שלום</p>
+<p>{{this.informationFormService.firstName}} </p>
+  <p>{{this.informationFormService.lastName}}</p> 
+
+<p>אנו שמחים שנכנסת לאתר שלנו </p>
+<p>הוראות מלוי הטופס</p>
+    <p>הקפידו על מילוי פרטים נכונים ומדויקים אי מלוי פרטים באופן מדויק יגרום לבעיות בהמשך</p>
+    <p>כל השדות הם שדות חובה בדקו שלא החסרתם אף פרט</p>
+    <p>אין אפשרות להרשם פעמיים למערכת לעדכון פרטים לחצו על עדכון</p>
+    <p>מלאו את הטופס ברוגע קחו את זמן שלכם ובדקו כל פרט</p>
+    <p>כתבו מס ילדים מדויק כולל ילדים נשואים וכן ילדים מעל גיל 18</p>
+    <p>הקפידו על תאריכים שונים</p>
+    <p>אף אם ילדך בקופת חולים אחרת בחר את קופת החולים שלך</p>
+    
+
+<p>תודה אנו מקווים שנהניתם</p>
+<button (click)="lookDetails()">לפרטי המשתמש לחץ כאן</button>
+<div *ngIf="look">
+ <p>firstname:   {{this.informationFormService.firstName}}</p>  <br/>
+  <p>LastName:   {{this.informationFormService.lastName}}</p>      <br/>
+  <p>DateOfBirth:  {{this.informationFormService.date}}</p>     <br/>
+  <p>Tz:  {{this.informationFormService.tz}}</p>         <br/>
+  <p>HMO: {{this.informationFormService.hmoN}}</p>       <br/>
+  <p>kind:  {{this.informationFormService.kindN}}</p>     <br/>
+</div>
+</div>

@@ -1,0 +1,6 @@
+D:\project\ProjectCityBook\DTO\bin\Debug\DTO.dll
+D:\project\ProjectCityBook\DTO\bin\Debug\DTO.pdb
+D:\project\ProjectCityBook\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+D:\project\ProjectCityBook\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\project\ProjectCityBook\DTO\obj\Debug\DTO.dll
+D:\project\ProjectCityBook\DTO\obj\Debug\DTO.pdb
